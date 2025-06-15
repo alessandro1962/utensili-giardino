@@ -15,7 +15,6 @@ import List from '@mui/material/List';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardHeader from '@mui/material/CardHeader';
-import CardActions from '@mui/material/CardActions';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -250,7 +249,6 @@ function App() {
                 value={formItem.location}
                 onChange={e => setFormItem({ ...formItem, location: e.target.value })}
                 size="small"
-                required
               >
                 {locations.map((location) => (
                   <MenuItem key={location} value={location}>
@@ -259,44 +257,48 @@ function App() {
                 ))}
               </TextField>
 
-              <Button type="submit" variant="contained" startIcon={<BuildIcon />}>
-                Aggiungi item
+              <Button type="submit" variant="contained" color="primary">
+                Aggiungi Item
               </Button>
             </Box>
           </CardContent>
         </Card>
 
         {/* Filtri */}
-        <Box sx={{ display: 'flex', gap: 2, mb: 3 }}>
-          <TextField
-            select
-            label="Filtra per location"
-            value={locationFiltro}
-            onChange={e => setLocationFiltro(e.target.value)}
-            size="small"
-            sx={{ minWidth: 200 }}
-          >
-            <MenuItem value="Tutte">Tutte le locations</MenuItem>
-            {locations.map((location) => (
-              <MenuItem key={location} value={location}>
-                {location}
-              </MenuItem>
-            ))}
-          </TextField>
+        <Card sx={{ mb: 4 }}>
+          <CardContent>
+            <Box sx={{ display: 'flex', gap: 2, mb: 2 }}>
+              <TextField
+                select
+                label="Filtra per location"
+                value={locationFiltro}
+                onChange={e => setLocationFiltro(e.target.value)}
+                size="small"
+                sx={{ flexGrow: 1 }}
+              >
+                <MenuItem value="Tutte">Tutte le locations</MenuItem>
+                {locations.map((location) => (
+                  <MenuItem key={location} value={location}>
+                    {location}
+                  </MenuItem>
+                ))}
+              </TextField>
 
-          <TextField
-            select
-            label="Filtra per tipo"
-            value={tipoFiltro}
-            onChange={e => setTipoFiltro(e.target.value as 'tutti' | 'utensile' | 'macchina')}
-            size="small"
-            sx={{ minWidth: 200 }}
-          >
-            <MenuItem value="tutti">Tutti i tipi</MenuItem>
-            <MenuItem value="utensile">Utensili</MenuItem>
-            <MenuItem value="macchina">Macchine</MenuItem>
-          </TextField>
-        </Box>
+              <TextField
+                select
+                label="Filtra per tipo"
+                value={tipoFiltro}
+                onChange={e => setTipoFiltro(e.target.value as 'tutti' | 'utensile' | 'macchina')}
+                size="small"
+                sx={{ flexGrow: 1 }}
+              >
+                <MenuItem value="tutti">Tutti i tipi</MenuItem>
+                <MenuItem value="utensile">Utensili</MenuItem>
+                <MenuItem value="macchina">Macchine</MenuItem>
+              </TextField>
+            </Box>
+          </CardContent>
+        </Card>
 
         {/* Lista items */}
         <List>
@@ -304,8 +306,6 @@ function App() {
             <Card key={idx} sx={{ mb: 2 }}>
               <CardHeader
                 avatar={getIconByValue(item.icona, item.tipo)}
-                title={item.nome}
-                subheader={`${item.tipo === 'utensile' ? 'Utensile' : 'Macchina'} - ${item.location}`}
                 action={
                   <Tooltip title="Elimina">
                     <IconButton onClick={() => handleDeleteItem(idx)}>
@@ -313,14 +313,14 @@ function App() {
                     </IconButton>
                   </Tooltip>
                 }
+                title={item.nome}
+                subheader={`${item.tipo === 'utensile' ? 'Utensile' : 'Macchina'} - ${item.location}`}
               />
-              {item.descrizione && (
-                <CardContent>
-                  <Typography variant="body2" color="text.secondary">
-                    {item.descrizione}
-                  </Typography>
-                </CardContent>
-              )}
+              <CardContent>
+                <Typography variant="body2" color="text.secondary">
+                  {item.descrizione}
+                </Typography>
+              </CardContent>
             </Card>
           ))}
         </List>
@@ -329,4 +329,4 @@ function App() {
   );
 }
 
-export default App;
+export default App; 

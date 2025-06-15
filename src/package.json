@@ -1,8 +1,8 @@
 {
-  "name": "utensili-campagna",
+  "name": "utensili-giardino-new",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://alessandro.github.io/utensili-campagna",
+  "homepage": "https://alessandro1962.github.io/utensili-giardino",
   "dependencies": {
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
@@ -23,7 +23,7 @@
   },
   "scripts": {
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
+    "deploy": "gh-pages -d build --dotfiles",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
